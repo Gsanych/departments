@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+           version="2.5">
+
+
+    <servlet>
+        <servlet-name>CreateDep</servlet-name>
+        <servlet-class>sanych.forAimprosoft.controllers.CreateDep</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>UpdateDep</servlet-name>
+        <servlet-class>sanych.forAimprosoft.controllers.UpdateDep</servlet-class>
+    </servlet>
+
+
+    <servlet>
+        <servlet-name>UpdateEmp</servlet-name>
+        <servlet-class>sanych.forAimprosoft.controllers.UpdateEmp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>DeleteDep</servlet-name>
+        <servlet-class>sanych.forAimprosoft.controllers.DeleteDep</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>DeleteEmp</servlet-name>
+        <servlet-class>sanych.forAimprosoft.controllers.DeleteEmp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>View</servlet-name>
+        <servlet-class>sanych.forAimprosoft.controllers.View</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateEmp</servlet-name>
+        <servlet-class>sanych.forAimprosoft.controllers.CreateEmp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewEmp</servlet-name>
+        <servlet-class>sanych.forAimprosoft.controllers.ViewEmp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Redirect</servlet-name>
+        <servlet-class>sanych.forAimprosoft.controllers.Redirect</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>View</servlet-name>
+        <url-pattern>/servlet/View</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateEmp</servlet-name>
+        <url-pattern>/servlet/CreateEmp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateDep</servlet-name>
+        <url-pattern>/servlet/CreateDep</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateEmp</servlet-name>
+        <url-pattern>/servlet/UpdateEmp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateDep</servlet-name>
+        <url-pattern>/servlet/UpdateDep</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>DeleteEmp</servlet-name>
+    <url-pattern>/servlet/DeleteEmp</url-pattern>
+</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDep</servlet-name>
+        <url-pattern>/servlet/DeleteDep</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewEmp</servlet-name>
+        <url-pattern>/servlet/ViewEmp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Redirect</servlet-name>
+        <url-pattern>/servlet/Redirect</url-pattern>
+    </servlet-mapping>
+
+
+    <error-page>
+        <exception-type>java.lang.IllegalStateException</exception-type>
+        <location>/WEB-INF/jsp/error.jsp</location>
+    </error-page>
+
+</web-app>

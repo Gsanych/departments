@@ -1,0 +1,2 @@
+create table departments(dept_id int primary key auto_increment, department varchar(30));
+create table employee(em_id  int primary key auto_increment, email varchar(50), name varchar(30), surname varchar(30), age int, birthday datetime, dept_id int, unique (email), foreign key (dept_id) references departments(dept_id)on delete cascade );
