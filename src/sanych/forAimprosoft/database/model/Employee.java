@@ -10,7 +10,7 @@ public class Employee {
     private String name;
     private String surname;
     private String email;
-    private int age ;
+    private int age;
     private Date birthday;
     private String department;
 
