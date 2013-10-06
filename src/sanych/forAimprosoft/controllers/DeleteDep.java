@@ -26,7 +26,7 @@ public class DeleteDep extends HttpServlet {
         }catch (Exception e){
             throw new IllegalStateException(e);
         }finally {
-           RequestDispatcher rd = request.getRequestDispatcher("/servlet/UpdateDep");
+           RequestDispatcher rd = request.getRequestDispatcher("/servlet/View");
            rd.forward(request,response);
         }
 
