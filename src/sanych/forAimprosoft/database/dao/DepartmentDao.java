@@ -1,7 +1,7 @@
 package sanych.forAimprosoft.database.dao;
 
-import sanych.forAimprosoft.database.model.Department;
 
+import sanych.forAimprosoft.database.model.Department;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +31,24 @@ public class DepartmentDao implements GenericDao<Department> {
         return departments;
     }
 
+    public boolean existsDep(String nameDep) {
+        Connection connection = getInstance().getConnection();
+        int count = 0;
+        try {
+            Statement st = connection.createStatement();
+
+            ResultSet rs = st.executeQuery("select count(*) as total from departments where department='" + nameDep + "'");
+            while (rs.next()) {
+                count = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        } finally {
+            getInstance().releaseConnection(connection);
+        }
+        return count != 0;
+    }
+
     @Override
     public Department create(Department entity) {
         Connection connection = getInstance().getConnection();
@@ -40,22 +58,22 @@ public class DepartmentDao implements GenericDao<Department> {
             st.executeUpdate();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
-        }  finally {
-        getInstance().releaseConnection(connection);
-    }
+        } finally {
+            getInstance().releaseConnection(connection);
+        }
         return entity;
     }
 
     @Override
     public void update(Department entity) {
         Connection connection = getInstance().getConnection();
-        try{
-        String sql="UPDATE departments SET department =? WHERE dept_id =?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, entity.getNameDep());
-        ps.setInt(2, entity.getId());
-        ps.executeUpdate();
-        } catch(SQLException e){
+        try {
+            String sql = "UPDATE departments SET department=? WHERE dept_id =?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, entity.getNameDep());
+            ps.setInt(2, entity.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
             throw new IllegalStateException(e);
         } finally {
             getInstance().releaseConnection(connection);
@@ -63,16 +81,16 @@ public class DepartmentDao implements GenericDao<Department> {
     }
 
     @Override
-    public void delete(Department id){
-    Connection connection = getInstance().getConnection();
-        try{
-        String sql = "DELETE FROM departments WHERE dept_id=?";
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, id.getId());
-        ps.executeUpdate();
-        } catch(SQLException e){
-           throw new IllegalStateException(e);
-        }finally {
+    public void delete(Department id) {
+        Connection connection = getInstance().getConnection();
+        try {
+            String sql = "DELETE FROM departments WHERE dept_id=?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        } finally {
             getInstance().releaseConnection(connection);
         }
     }

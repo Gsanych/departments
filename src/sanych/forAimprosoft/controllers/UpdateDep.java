@@ -2,6 +2,7 @@ package sanych.forAimprosoft.controllers;
 
 import sanych.forAimprosoft.database.dao.DepartmentDao;
 import sanych.forAimprosoft.database.model.Department;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,12 +17,14 @@ public class UpdateDep extends HttpServlet {
         DepartmentDao depDao=new DepartmentDao();
 
         try{
-            department.setNameDep(request.getParameter("department"));
+            department.setId(Integer.parseInt(request.getParameter("id")));
+            department.setNameDep(request.getParameter("depart"));
             depDao.update(department);
         } catch (Exception e){
             e.printStackTrace();
         } finally {
-           response.sendRedirect("/servlet/View");
+            RequestDispatcher rd = request.getRequestDispatcher("/servlet/View");
+            rd.forward(request, response);
         }
     }
 

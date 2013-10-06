@@ -2,7 +2,6 @@ package sanych.forAimprosoft.database.dao;
 
 
 import sanych.forAimprosoft.database.model.Employee;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +31,7 @@ public class EmployeeDao implements GenericDao<Employee>{
                 employee.setAge(rs.getInt("age"));
                 employee.setEmail(rs.getString("email"));
                 employee.setSurname(rs.getString("surname"));
+                employee.setBirthday(rs.getDate("birthday"));
                 employee.setDepartment(depId);
                 employees.add(employee);
             }
@@ -65,15 +65,16 @@ public class EmployeeDao implements GenericDao<Employee>{
     public Employee create(Employee entity) {
         Connection connection = getInstance().getConnection();
         try {
-            PreparedStatement st = connection.prepareStatement("INSERT INTO employee(name,surname,age,email,dept_id,birthday) VALUES(?,?,?,?,?,?)");
+            PreparedStatement st = connection.prepareStatement("INSERT INTO employee(name,surname,age,email,birthday,dept_id) VALUES(?,?,?,?,?,?)");
             st.setString(1, entity.getName());
             st.setString(2, entity.getSurname());
             st.setInt(3, entity.getAge());
             st.setString(4, entity.getEmail());
-            st.setInt(5, Integer.parseInt(entity.getDepartment()));
 
             Date date = new Date(entity.getBirthday().getTime());
-            st.setDate(6, date);
+            st.setDate(5, date);
+
+            st.setInt(6, Integer.parseInt(entity.getDepartment()));
 
             st.executeUpdate();
         } catch (SQLException e) {
@@ -89,14 +90,17 @@ public class EmployeeDao implements GenericDao<Employee>{
     public void update(Employee entity) {
         Connection connection = getInstance().getConnection();
         try{
-            String sql="UPDATE employee SET name=?,surname=?,email=?, age=?, dept_id=? WHERE em_id =?";
+            String sql="UPDATE employee SET name=?,surname=?,email=?,age=?,birthday=?,dept_id=? WHERE em_id =?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, entity.getName());
             ps.setString(2, entity.getSurname());
-            ps.setInt(3, entity.getAge());
-            ps.setString(4,entity.getEmail());
-            ps.setString(5, entity.getDepartment());
-            ps.setInt(6, entity.getId());
+            ps.setString(3, entity.getEmail());
+            ps.setInt(4, entity.getAge());
+
+            Date date = new Date(entity.getBirthday().getTime());
+            ps.setDate(5, date);
+            ps.setString(6, entity.getDepartment());
+            ps.setInt(7, entity.getId());
             ps.executeUpdate();
         } catch(SQLException e){
             throw new IllegalStateException(e);

@@ -14,6 +14,7 @@
         <th><b>Surname</b></th>
         <th><b>Age</b></th>
         <th><b>Email</b></th>
+        <th><b>Birthday</b></th>
     </tr>
     </thead>
     <tbody>
@@ -21,14 +22,23 @@
         for (Employee e : employees) {%>
 
     <tr>
-        <td><%=e.getName()%>
-        </td>
-        <td><%=e.getSurname()%>
-        </td>
-        <td><%=e.getAge()%>
-        </td>
-        <td><%=e.getEmail()%>
-        </td>
+        <form action="/servlet/UpdateEmp" method="get">
+            <td><input type="text" value="<%=e.getName()%>" name="nameEmp"/>
+            </td>
+            <td><input type="text" value="<%=e.getSurname()%>" name="surname"/>
+            </td>
+            <td><input type="text" value="<%=e.getAge()%>" name="age"/>
+            </td>
+            <td><input type="text" value="<%=e.getEmail()%>" name="email"/>
+            </td>
+            <td><input type="text" value="<%=e.getBirthday()%>" name="birthDay"/>
+            </td>
+            <td><input type="hidden" value="<%=e.getId()%>" name="em_id"/>
+            </td>
+            <td><input type="hidden" value="<%=e.getDepartment()%>" name="id"/>
+            </td>
+            <td><input type="submit" value="Update"/></td>
+        </form>
         <form action="/servlet/DeleteEmp" method="get">
             <td><input type="hidden" value="<%=e.getId()%>" name="em_id"/>
             <td><input type="hidden" value="<%=e.getDepartment()%>" name="id"/>

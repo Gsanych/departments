@@ -1,6 +1,7 @@
 package sanych.forAimprosoft;
 
 import com.sun.corba.se.impl.protocol.AddressingDispositionException;
+import sanych.forAimprosoft.database.dao.DepartmentDao;
 import sanych.forAimprosoft.database.dao.EmployeeDao;
 import sanych.forAimprosoft.database.model.Employee;
 
@@ -23,6 +24,7 @@ public class Validator {
 
     private Pattern pattern = Pattern.compile(EMAIL_PATTERN);
     private EmployeeDao employeeDao = new EmployeeDao();
+    DepartmentDao depDao=new DepartmentDao();
 
     public void validate(String email, String age, String date) throws ValidationException {
         Map<String, String> errors = new HashMap<>();
@@ -48,6 +50,19 @@ public class Validator {
             errors.put("date", "Date shouldn't be empty");
         }
 
+        if (!errors.isEmpty()) {
+            throw new ValidationException(errors);
+        }
+    }
+
+    public void validate(String nameDep) throws ValidationException {
+        Map<String, String> errors = new HashMap<>();
+
+        if (nameDep == null || nameDep.equals("")) {
+            errors.put("department", "Department is required");
+        } else if (depDao.existsDep(nameDep)){
+            errors.put("department", "such  department is already exists");
+        }
         if (!errors.isEmpty()) {
             throw new ValidationException(errors);
         }
