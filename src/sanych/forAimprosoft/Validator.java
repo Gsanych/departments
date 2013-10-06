@@ -59,7 +59,7 @@ public class Validator {
         Map<String, String> errors = new HashMap<>();
 
         if (nameDep == null || nameDep.equals("")) {
-            errors.put("department", "Department is required");
+            errors.put("department", "The field must not be empty");
         } else if (depDao.existsDep(nameDep)){
             errors.put("department", "such  department is already exists");
         }
